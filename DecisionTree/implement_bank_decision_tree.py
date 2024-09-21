@@ -49,7 +49,7 @@ def threea():
 
     result_dict = find_result_dic("3(a)",training_data, testing_data)
 
-    print("3(a)")
+    print("3(a) tree:")
     print(result_dict)
 
 def threeb():
@@ -63,7 +63,7 @@ def threeb():
 
     result_dict = find_result_dic("3(b)",training_data, testing_data)
 
-    print("3(b)")
+    print("3(b) tree:")
     print(result_dict)
 
 def main():

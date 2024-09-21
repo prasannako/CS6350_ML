@@ -28,7 +28,7 @@ def twob():
 
             result_dict[impurity_measure_metric][max_depth] = [training_error, testing_error]
 
-    print("2(b)")
+    print("2(b) tree:")
     print(result_dict)
 
 def main():
