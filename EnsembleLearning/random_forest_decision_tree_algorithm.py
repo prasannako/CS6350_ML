@@ -1,4 +1,5 @@
 import numpy as np
+import random
 from collections import Counter
 
 
@@ -82,7 +83,7 @@ class ID3DecisonTree():
         max_index = np.argmax(categories_counts)
         return categories[max_index]
 
-    def construct_tree(self, current_set: np.ndarray, attributes: list, current_depth: int = 0, tree: dict = None) -> dict:
+    def construct_tree(self, current_set: np.ndarray, attributes: list, current_depth: int = 0, size_attribute_subset = 2, tree: dict = None) -> dict:
         if len(np.unique(current_set[self.label_index])) <= 1:
             return np.unique(current_set[self.label_index])[0]
         
@@ -98,7 +99,8 @@ class ID3DecisonTree():
         else:
             current_depth += 1
 
-            best_attribute_to_split = self.get_best_attribute_to_split(current_set, attributes)
+            random_attributes = random.sample(attributes, size_attribute_subset) 
+            best_attribute_to_split = self.get_best_attribute_to_split(current_set, attributes=random_attributes)
 
             tree = {best_attribute_to_split: {}}
 
@@ -106,13 +108,13 @@ class ID3DecisonTree():
         
             for value in np.unique(current_set[best_attribute_to_split]):
                 sub_set = current_set[current_set[best_attribute_to_split] == value]
-                subtree = self.construct_tree(sub_set, remaining_attributes, current_depth, tree)
+                subtree = self.construct_tree(sub_set, remaining_attributes, current_depth, size_attribute_subset, tree)
                 tree[best_attribute_to_split][value] = subtree
             
             return tree
 
-    @staticmethod
-    def predict_label(tree, sample):
+    @classmethod
+    def predict_label(cls, tree, sample):
         current_node = tree
         while isinstance(current_node, dict): 
             attribute = next(iter(current_node)) 

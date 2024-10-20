@@ -111,8 +111,8 @@ class ID3DecisonTree():
             
             return tree
 
-    @staticmethod
-    def predict_label(tree, sample):
+    @classmethod
+    def predict_label(cls, tree, sample):
         current_node = tree
         while isinstance(current_node, dict): 
             attribute = next(iter(current_node)) 
