@@ -135,7 +135,6 @@ def implement_decision_tree(training_data, testing_data):
     train_errors = []
     test_errors = []
     for max_depth in depths: 
-        print(max_depth)
         tree = ID3DecisonTree(dataset=training_data, 
                             label_index=len(training_data.columns) - 1, 
                             max_depth=max_depth, 
