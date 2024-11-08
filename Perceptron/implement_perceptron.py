@@ -41,6 +41,12 @@ def main():
     print("Weights with highest counts (top 10)")
     for count, weight in zip(highest_counts, highest_count_weights):
         print(f"Count: {count}, Weight: {weight}")
+    lowest_count_index = np.argsort(unique_weight_counts)[:10]
+    lowest_counts = unique_weight_counts[lowest_count_index]
+    lowest_count_weights = unique_weights[lowest_count_index]
+    print("Weights with lowest counts (top 10)")
+    for count, weight in zip(lowest_counts, lowest_count_weights):
+        print(f"Count: {count}, Weight: {weight}")
     print("Average test error with voted Perceptron   ", VotedPerceptron.calculate_error(X_test, y_test))
 
     print("\n Implementing Average Perceptron")
